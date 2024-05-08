@@ -10,8 +10,20 @@ engine = create_engine(
 )
 # Create a SQLAlchemy "engine"
 
-SessionLocal = sessionmaker(autoflush=False, autocommite=False, bind=engine)
+SessionLocal = sessionmaker(autoflush=False, bind=engine)
 # Each instance of the SessionLocal class will be a database session
 
 Base = declarative_base()
 # Later we will inherit from this class to create each of the database models or classes(the ORM models)
+
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+    '''
+    We need to have an independent database session/connection (SessionLocal) per request, 
+    use the same session through all the request and then close it after the request is finished.
+    '''
