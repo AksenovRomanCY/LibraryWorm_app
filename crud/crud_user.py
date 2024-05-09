@@ -6,10 +6,9 @@ from schemas import schema_user as schema
 
 # In this file we will have reusable functions to interact with the data in the database.
 
-'''
+
 def get_user_by_id(db: Session, user_id: int):
     return db.query(model.User).filter(model.User.id == user_id).first()
-'''
 
 
 def get_user_by_name(db: Session, name: str):

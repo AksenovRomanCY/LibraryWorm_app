@@ -22,7 +22,7 @@ def read_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     return users
 
 
-@router.get("/users/{user_id}", response_model=schema.User, tags=["user"])
+@router.get("/users/{int(user_id)}", response_model=schema.User, tags=["user"])
 def read_user_by_id(user_id: int = None, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_id(db, user_id=user_id)
     if db_user is None:
@@ -30,7 +30,7 @@ def read_user_by_id(user_id: int = None, db: Session = Depends(get_db)):
     return db_user
 
 
-@router.get("/users/{name}", response_model=schema.User, tags=["user"])
+@router.get("/users/{str(name)}", response_model=schema.User, tags=["user"])
 def get_user_by_name(name: str = None, db: Session = Depends(get_db)):
     db_user = crud.get_user_by_name(db, name=name)
     if db_user is None:
