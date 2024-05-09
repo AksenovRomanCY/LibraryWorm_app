@@ -6,9 +6,10 @@ from schemas import schema_user as schema
 
 # In this file we will have reusable functions to interact with the data in the database.
 
-
+'''
 def get_user_by_id(db: Session, user_id: int):
     return db.query(model.User).filter(model.User.id == user_id).first()
+'''
 
 
 def get_user_by_name(db: Session, name: str):
@@ -30,9 +31,10 @@ def create_user(db: Session, data: schema.User):  # UserCreate
     return db_user
 
 
-def update_user_active_by_id(db: Session, user_id: int, data: schema.User):
+def update_user_by_id(db: Session, user_id: int, data: schema.UserBase):
     db_user = db.query(model.User).filter(model.User.id == user_id).first()
-    db_user = model.User(name=data.name, id=data.id, is_active=data.is_active)
+    db_user.name = data.name
+    db_user.is_active = data.is_active
     try:
         db.add(db_user)
         db.commit()

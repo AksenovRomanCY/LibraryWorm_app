@@ -3,6 +3,7 @@ from pydantic import BaseModel
 
 class UserBase(BaseModel):
     name: str
+    is_active: bool
 
     # Common attribute while creating or reading data
 
@@ -15,7 +16,6 @@ class UserCreate(UserBase):
 
 
 class User(UserBase):
-    is_active: bool
     id: int
 
 
