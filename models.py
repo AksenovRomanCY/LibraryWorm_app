@@ -3,14 +3,6 @@ from sqlalchemy import Boolean, String, Column, Uuid
 from database import Base
 
 
-class User(Base):
-    __tablename__ = "users"
-
-    id = Column(String, primary_key=True, unique=True)
-    name = Column(String, index=True)
-    is_active = Column(Boolean, default=True)
-
-
 class Students(Base):
     __tablename__ = "students"
 

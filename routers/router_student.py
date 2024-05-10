@@ -27,7 +27,7 @@ def get_student_by_name(student_name: str = None, db: Session = Depends(get_db))
 
 
 @router.put("/students/", response_model=schema.StudentBase)
-def update_student_by_uid(data: schema.StudentBase = None, db: Session = Depends(get_db)):
+def update_class_by_student_name(data: schema.StudentBase = None, db: Session = Depends(get_db)):
     db_user = crud.get_student_by_name(db, student_name=data.student_name)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")

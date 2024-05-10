@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+import uuid
 
 import models as model
 from schemas import schema_student as schema
@@ -13,7 +14,7 @@ def get_students(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_student(db: Session, data: schema.StudentBase):
-    db_user = model.Students(student_name=data.student_name, student_class=data.student_class)
+    db_user = model.Students(student_name=data.student_name, student_class=data.student_class, student_uid=uuid.uuid4())
     try:
         db.add(db_user)
         db.commit()
