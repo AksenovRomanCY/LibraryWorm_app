@@ -1,3 +1,4 @@
+import uuid
 from sqlalchemy import Boolean, String, Column, Uuid
 
 from database import Base
@@ -19,8 +20,8 @@ class Books(Base):
 
     library_id = Column(String, index=True)
     book_name = Column(String, index=True)
-    book_author = Column(String, index=True)
-    book_description = Column(String, index=True)
+    book_author = Column(String, index=True, default=None)
+    book_description = Column(String, index=True, default=None)
 
     available = Column(Boolean, default=True)
-    student_uid = Column(Uuid, primary_key=True, unique=True, default=None)
+    student_uid = Column(Uuid, primary_key=False, unique=False, default=uuid.UUID(int=0))

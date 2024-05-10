@@ -12,5 +12,5 @@ class BookCreate(BookBase):
     library_id: str
 
 
-class BookStudentAppend(BookBase):
-    student_uid: str
+class BookSee(BookCreate):
+    available: bool
