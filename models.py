@@ -12,7 +12,7 @@ class User(Base):
 
 
 class Students(Base):
-    __tablename__ = "Student"
+    __tablename__ = "students"
 
     student_uid = Column(Uuid, primary_key=True, unique=True)
 
@@ -21,7 +21,7 @@ class Students(Base):
 
 
 class Books(Base):
-    __tablename__ = "Books"
+    __tablename__ = "books"
 
     book_uid = Column(Uuid, primary_key=True, unique=True)
 

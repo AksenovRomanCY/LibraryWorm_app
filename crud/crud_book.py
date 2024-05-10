@@ -4,12 +4,16 @@ import models as model
 from schemas import schema_book as schema
 
 
-def get_book_by_id(db: Session, book_uid: str):
+def get_book_by_uid(db: Session, book_uid: str):
     return db.query(model.Books).filter(model.Books.book_uid == book_uid).first()
 
 
 def get_book_by_name(db: Session, book_name: str):
     return db.query(model.Books).filter(model.Books.book_name == book_name).first()
+
+
+def get_book_by_lib_id(db: Session, library_id: str):
+    return db.query(model.Books).filter(model.Books.library_id == library_id).first()
 
 
 def get_books(db: Session, skip: int = 0, limit: int = 100):
@@ -27,7 +31,7 @@ def create_book(db: Session, data: schema.BookCreate):  # UserCreate
     return db_user
 
 
-def update_book_by_id(db: Session, book_uid: str, data: schema.BookBase):
+def update_book_by_uid(db: Session, book_uid: str, data: schema.BookBase):
     db_user = db.query(model.Books).filter(model.Books.book_uid == book_uid).first()
     db_user.book_name = data.book_name
     db_user.book_author = data.book_author
@@ -41,9 +45,10 @@ def update_book_by_id(db: Session, book_uid: str, data: schema.BookBase):
     return db_user
 
 
-def update_student_in_book(db: Session, book_uid: str, student_uid: str):
+def update_student_in_book_by_uid(db: Session, book_uid: str, student_name: str):
     db_user = db.query(model.Books).filter(model.Books.book_uid == book_uid).first()
-    db_user.student_uid = student_uid
+    db_user_st = db.query(model.Students).filter(model.Books.student_name == student_name).first()
+    db_user.student_uid = db_user_st.student_uid
     try:
         db.add(db_user)
         db.commit()
@@ -51,5 +56,3 @@ def update_student_in_book(db: Session, book_uid: str, student_uid: str):
     except Exception as e:
         print(e)
     return db_user
-
-
