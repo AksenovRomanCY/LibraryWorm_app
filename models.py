@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, String, Integer, Column, uuid
+from sqlalchemy import Boolean, String, Column, Uuid
 
 from database import Base
 
@@ -14,7 +14,7 @@ class User(Base):
 class Students(Base):
     __tablename__ = "Student"
 
-    student_uid = Column(uuid, primary_key=True, unique=True)
+    student_uid = Column(Uuid, primary_key=True, unique=True)
 
     student_name = Column(String, index=True)
     student_class = Column(String, index=True)
@@ -23,7 +23,7 @@ class Students(Base):
 class Books(Base):
     __tablename__ = "Books"
 
-    book_uid = Column(uuid, primary_key=True, unique=True)
+    book_uid = Column(Uuid, primary_key=True, unique=True)
 
     library_id = Column(String, index=True)
     book_name = Column(String, index=True)
@@ -31,4 +31,4 @@ class Books(Base):
     book_description = Column(String, index=True)
 
     available = Column(Boolean, default=True)
-    student_uid = Column(uuid, primary_key=True, unique=True, default=None)
+    student_uid = Column(Uuid, primary_key=True, unique=True, default=None)
