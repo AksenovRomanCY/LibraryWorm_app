@@ -40,10 +40,24 @@ def update_book_by_library_id(db: Session, library_id: str, data: schema.BookBas
     return db_user
 
 
-def update_student_in_book_by_library_id(db: Session, library_id: str, student_name: str):
+def add_student_in_book_by_library_id(db: Session, library_id: str, student_name: str):
     db_user = db.query(model.Books).filter(model.Books.library_id == library_id).first()
     db_user_st = db.query(model.Students).filter(model.Students.student_name == student_name).first()
     db_user.student_uid = db_user_st.student_uid
+    db_user.available = False
+    try:
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+    except Exception as e:
+        print(e)
+    return db_user
+
+
+def remove_student_in_book_by_library_id(db: Session, library_id: str):
+    db_user = db.query(model.Books).filter(model.Books.library_id == library_id).first()
+    db_user.student_uid = uuid.UUID(int=0)
+    db_user.available = True
     try:
         db.add(db_user)
         db.commit()
