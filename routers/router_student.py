@@ -1,7 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
-import uuid
 
 from crud import crud_student as crud
 from schemas import schema_student as schema
@@ -9,17 +8,12 @@ from schemas import schema_student as schema
 router = APIRouter()
 
 
-@router.post('/students/', response_model=schema.StudentBase)
+@router.post('/create_student', response_model=schema.StudentBase)
 def create_student(data: schema.StudentBase = None, db: Session = Depends(get_db)):
     return crud.create_student(db=db, data=data)
 
 
-@router.get("/students/", response_model=list[schema.StudentBase])
-def get_students(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_students(db, skip=skip, limit=limit)
-
-
-@router.get("/students/{str(student_name)}", response_model=schema.StudentBase)
+@router.get("/get_student/{str(student_name)}", response_model=schema.StudentBase)
 def get_student_by_name(student_name: str = None, db: Session = Depends(get_db)):
     db_user = crud.get_student_by_name(db, student_name=student_name)
     if db_user is None:
@@ -27,7 +21,7 @@ def get_student_by_name(student_name: str = None, db: Session = Depends(get_db))
     return db_user
 
 
-@router.put("/students/", response_model=schema.StudentBase)
+@router.put("/change_class", response_model=schema.StudentBase)
 def update_class_by_student_name(data: schema.StudentBase = None, db: Session = Depends(get_db)):
     db_user = crud.get_student_by_name(db, student_name=data.student_name)
     if db_user is None:
