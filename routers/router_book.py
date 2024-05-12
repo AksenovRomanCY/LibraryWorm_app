@@ -54,7 +54,7 @@ def add_student_in_book_by_library_id(
     return crud.add_student_in_book_by_library_id(student_name=student_name, db=db, library_id=library_id)
 
 
-@router.put("/books/{str(library_id)}/{str(student_name)}", response_model=schema.BookBase)
+@router.put("/books/{str(library_id)}", response_model=schema.BookBase)
 def remove_student_in_book_by_library_id(
         library_id: str = None, db: Session = Depends(get_db)):
     return crud.remove_student_in_book_by_library_id(db=db, library_id=library_id)
