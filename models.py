@@ -10,7 +10,7 @@ class Students(Base):
 
     student_uid = Column(Uuid, primary_key=True, unique=True)
 
-    student_name = Column(String, index=True)
+    student_name = Column(String, index=True, default=None)
     student_class = Column(String, index=True, default=None)
 
 
