@@ -14,3 +14,6 @@ class BookCreate(BookBase):
 
 class BookSee(BookCreate):
     available: bool
+    student_name: str
+    student_class: str
+

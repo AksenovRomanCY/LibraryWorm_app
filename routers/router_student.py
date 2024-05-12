@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from database import get_db
+import uuid
 
 from crud import crud_student as crud
 from schemas import schema_student as schema
@@ -9,7 +10,7 @@ router = APIRouter()
 
 
 @router.post('/students/', response_model=schema.StudentBase)
-def create_student(data: schema.StudentBase = None, db: Session = Depends(get_db)):  # UserCreate
+def create_student(data: schema.StudentBase = None, db: Session = Depends(get_db)):
     return crud.create_student(db=db, data=data)
 
 

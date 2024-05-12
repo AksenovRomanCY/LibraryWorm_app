@@ -6,15 +6,11 @@ from schemas import schema_book as schema
 
 
 def get_book_by_name(db: Session, book_name: str):
-    return db.query(model.Books).filter(model.Books.book_name == book_name).first()
+    return db.query(model.Books, model.Students).filter(model.Books.book_name == book_name).first()
 
 
 def get_book_by_library_id(db: Session, library_id: str):
-    return db.query(model.Books).filter(model.Books.library_id == library_id).first()
-
-
-def get_books(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(model.Books).offset(skip).limit(limit).all()
+    return db.query(model.Books, model.Students).filter(model.Books.library_id == library_id).first()
 
 
 def create_book(db: Session, data: schema.BookCreate):
@@ -55,3 +51,10 @@ def update_student_in_book_by_library_id(db: Session, library_id: str, student_n
     except Exception as e:
         print(e)
     return db_user
+
+
+def get_books_all(db: Session, skip: int = 0, limit: int = 100):
+    db_users = db.query(
+        model.Books.book_name, model.Books.book_author, model.Books.book_description,
+        model.Books.available, model.Books.library_id, model.Students.student_name, model.Students.student_class)
+    return db_users.join(model.Students).offset(skip).limit(limit).all()
