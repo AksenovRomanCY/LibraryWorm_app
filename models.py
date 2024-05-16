@@ -23,6 +23,8 @@ class Books(Base):
     book_name = Column(String, index=True)
     book_author = Column(String, index=True, default=None)
     book_description = Column(String, index=True, default=None)
+    school = Column(String, index=True)
+    language = Column(String, index=True)
 
     available = Column(Boolean, default=True)
     student_uid = Column(Uuid, ForeignKey("students.student_uid"),

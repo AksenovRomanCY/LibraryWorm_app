@@ -9,7 +9,7 @@ router = APIRouter()
 
 
 @router.post('/create_book/', response_model=schema.BookCreate)
-def create_book(data: schema.BookCreate = None, db: Session = Depends(get_db)):  # UserCreate
+def create_book(data: schema.BookCreate = None, db: Session = Depends(get_db)):
     db_user = crud.get_book_by_library_id(db, library_id=data.library_id)
     if db_user:
         raise HTTPException(status_code=400, detail="Book already registered")
