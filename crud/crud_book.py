@@ -6,15 +6,19 @@ from schemas import schema_book as schema
 
 
 def get_book_by_name(db: Session, book_name: str):
-    return db.query(model.Books, model.Students).filter(model.Books.book_name == book_name).first()
+    db_users = db.query(
+        model.Books.book_name, model.Books.book_author, model.Books.book_description,
+        model.Books.available, model.Books.library_id, model.Books.language, model.Books.school,
+        model.Students.student_name, model.Students.student_class)
+    return db_users.join(model.Students).filter(model.Books.book_name == book_name).first()
 
 
 def get_book_by_library_id(db: Session, library_id: str):
     db_users = db.query(
         model.Books.book_name, model.Books.book_author, model.Books.book_description,
         model.Books.available, model.Books.library_id, model.Books.language, model.Books.school,
-        model.Students.student_name, model.Students.student_class).filter(model.Books.library_id == library_id).first()
-    return db_users.join(model.Books, model.Students)
+        model.Students.student_name, model.Students.student_class)
+    return db_users.join(model.Students).filter(model.Books.library_id == library_id).first()
 
 
 def create_book(db: Session, data: schema.BookCreate):
