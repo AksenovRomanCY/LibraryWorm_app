@@ -14,7 +14,8 @@ def get_students(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_student(db: Session, data: schema.StudentBase):
-    db_user = model.Students(student_name=data.student_name, student_class=data.student_class, student_uid=uuid.uuid4())
+    db_user = model.Students(student_surname=data.student_surname, student_name=data.student_name,
+                             student_class=data.student_class, student_uid=uuid.uuid4())
     try:
         db.add(db_user)
         db.commit()
@@ -24,6 +25,7 @@ def create_student(db: Session, data: schema.StudentBase):
     return db_user
 
 
+"""
 def update_student_by_name(db: Session, data: schema.StudentBase):
     db_user = db.query(model.Students).filter(model.Students.student_name == data.student_name).first()
     db_user.student_name = data.student_name
@@ -35,3 +37,4 @@ def update_student_by_name(db: Session, data: schema.StudentBase):
     except Exception as e:
         print(e)
     return db_user
+"""

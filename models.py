@@ -10,7 +10,8 @@ class Students(Base):
 
     student_uid = Column(Uuid, primary_key=True, unique=True)
 
-    student_name = Column(String, index=True, default=None)
+    student_surname = Column(String, index=True)
+    student_name = Column(String, index=True)
     student_class = Column(String, index=True, default=None)
 
 
@@ -21,12 +22,15 @@ class Books(Base):
 
     library_id = Column(String, index=True)
     book_name = Column(String, index=True)
-    book_author = Column(String, index=True, default=None)
+    book_author_surname = Column(String, index=True)
+    book_author = Column(String, index=True)
     book_description = Column(String, index=True, default=None)
     school = Column(String, index=True)
     language = Column(String, index=True)
 
     available = Column(Boolean, default=True)
+    date_of_issue = Column(String, index=True, default='00-00-0000')
+
     student_uid = Column(Uuid, ForeignKey("students.student_uid"),
                          primary_key=False, unique=False, default=uuid.UUID(int=0))
 

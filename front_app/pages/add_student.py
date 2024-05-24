@@ -5,16 +5,16 @@ st.header('The project is still :violet[in progress]', divider='violet')
 
 with st.form("my_form"):
     st.write("Add student")
+    surname = st.text_input('Surname')
     name = st.text_input('Name')
     st_class = st.text_input('Class')
-    st.caption(name)
-    st.caption(st_class)
     submitted = st.form_submit_button("Submit")
     if submitted:
-        if (name or st_class) == '':
+        if (name or st_class or surname) == '':
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
             package = {
+                "student_surname": surname,
                 "student_name": name,
                 "student_class": st_class,
             }
