@@ -34,12 +34,7 @@ if bind:
             url='http://127.0.0.1:8000/books/update_a/{str(library_id)}/{str(student_name)}',
             params={"library_id": str(st.session_state['library_id']), "student_name": str(student_name)}
         )
-        response1 = requests.get(
-            url='http://127.0.0.1:8000/books/get_book_id/{str(library_id)}',
-            params={"library_id": str(st.session_state['library_id'])}
-        )
-        response_dict = response1.json()
-        st.table(data=response_dict)
+        st.success('Done!', icon="✅")
         st.session_state['library_id'] = ''
 
 
