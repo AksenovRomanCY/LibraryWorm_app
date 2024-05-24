@@ -24,17 +24,3 @@ def create_student(db: Session, data: schema.StudentBase):
         print(e)
     return db_user
 
-
-"""
-def update_student_by_name(db: Session, data: schema.StudentBase):
-    db_user = db.query(model.Students).filter(model.Students.student_name == data.student_name).first()
-    db_user.student_name = data.student_name
-    db_user.student_class = data.student_class
-    try:
-        db.add(db_user)
-        db.commit()
-        db.refresh(db_user)
-    except Exception as e:
-        print(e)
-    return db_user
-"""
