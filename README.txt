@@ -3,7 +3,7 @@
 
 ```git clone https://github.com/AksenovRomanCY/LibraryWorm_app.git```
 
-2. Переход в директорию Oxygen
+2. Переход в директорию
 
 ```cd sql_app```
 
@@ -19,10 +19,10 @@
 
 ```pip3 install -r requirements.txt```
 
-6. Запуск скрипта
+6. Запуск скрипта(В разных терминалах)
 
-```uvicorn main:app --reload```
-```streamlit run front_main.py```
+```uvicorn main:app --reload``` (в папке sql_app)
+```streamlit run front_main.py```(в папке sql_app/front_app)
 
 7. Вручную создать в таблице базе данных "students" строку с uuid "00000000000000000000000000000000",
    и "-" в полях имени и класса
