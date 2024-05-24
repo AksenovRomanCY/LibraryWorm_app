@@ -21,19 +21,19 @@ def get_books_all(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
     return crud.get_books_all(db, skip=skip, limit=limit)
 
 
-@router.get("/get_book/{str(book_name)}", response_model=schema.BookSee)
+@router.get("/get_book_name/{str(book_name)}", response_model=schema.BookSee)
 def get_book_by_name(book_name: str = None, db: Session = Depends(get_db)):
     db_user = crud.get_book_by_name(db, book_name=book_name)
     if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="Book not found")
     return db_user
 
 
-@router.get("/get_book/{str(library_id)}", response_model=schema.BookSee)
+@router.get("/get_book_id/{str(library_id)}", response_model=schema.BookSee)
 def get_book_by_library_id(library_id: str = None, db: Session = Depends(get_db)):
     db_user = crud.get_book_by_library_id(db, library_id=library_id)
     if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
+        raise HTTPException(status_code=404, detail="Book not found")
     return db_user
 
 
