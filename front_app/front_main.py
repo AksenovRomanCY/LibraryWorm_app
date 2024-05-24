@@ -11,13 +11,15 @@ with st.container():
     st.dataframe(data=response_dict, column_config={
         "library_id": "ID",
         "book_name": "Title",
-        "book_author": "Author",
+        "book_author_surname": "Author surname",
+        "book_author": "Author name",
         "book_description": "Description",
         "language": "Language",
         "school": "School",
         "available": "Available",
         "student_name": "Borrower name",
         "student_class": "Borrower class",
+        "date_of_issue": "Data of issue"
     })
 
 st.divider()

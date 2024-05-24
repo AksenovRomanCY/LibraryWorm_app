@@ -7,7 +7,8 @@ with st.form("my_form"):
     st.write("Add book")
     lib_id = st.text_input('ID')
     name = st.text_input('Title')
-    author = st.text_input('Author')
+    author_surname = st.text_input('Author surname')
+    author = st.text_input('Author name')
     description = st.text_area('Description (optional)')
     col1, col2 = st.columns(2)
     with col1:
@@ -28,6 +29,7 @@ with st.form("my_form"):
         else:
             package = {
                 "book_name": name,
+                "book_author_surname": author_surname,
                 "book_author": author,
                 "book_description": description,
                 "school": school,

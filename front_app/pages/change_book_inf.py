@@ -3,6 +3,8 @@ import streamlit as st
 
 if 'book_name' not in st.session_state:
     st.session_state['book_name'] = ''
+if 'book_author_surname' not in st.session_state:
+    st.session_state['book_author_surname'] = ''
 if 'book_author' not in st.session_state:
     st.session_state['book_author'] = ''
 if 'book_description' not in st.session_state:
@@ -26,6 +28,7 @@ if search:
         response_dict = response.json()
         st.table(data=response_dict)
         st.session_state['book_name'] = response_dict.get("book_name")
+        st.session_state['book_author_surname'] = response_dict.get("book_author_surname")
         st.session_state['book_author'] = response_dict.get("book_author")
         st.session_state['book_description'] = response_dict.get("book_description")
         st.session_state['school'] = response_dict.get("school")
@@ -36,7 +39,8 @@ st.divider()
 
 st.write("Add book")
 name = st.text_input('Title', st.session_state['book_name'])
-author = st.text_input('Author', st.session_state['book_author'])
+author_surname = st.text_input('Author surname', st.session_state['book_author_surname'])
+author = st.text_input('Author name', st.session_state['book_author'])
 description = st.text_area('Description (optional)', st.session_state['book_description'])
 if st.session_state['book_description'] == "Primary":
     sch_point = 0
@@ -54,6 +58,7 @@ if submitted:
     else:
         package = {
             "book_name": name,
+            "book_author_surname": author_surname,
             "book_author": author,
             "book_description": description,
             "school": school,
@@ -64,6 +69,7 @@ if submitted:
         )
         st.success('Done!', icon="✅")
         st.session_state['book_name'] = ''
+        st.session_state['book_author_surname'] = ''
         st.session_state['book_author'] = ''
         st.session_state['book_description'] = ''
         st.session_state['school'] = ''
