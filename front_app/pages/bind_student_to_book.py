@@ -39,8 +39,8 @@ if bind:
 
 
 with st.sidebar:
-    st.title('LibraryWorm')
-    st.page_link("front_main.py", label="Catalog")
+    st.title(':violet[Library]Worm')
+    st.page_link("front_main.py", label="Main page")
 
     st.header(':violet[Changes] in the book catolog', divider='violet')
     st.page_link("pages/add_book.py", label="Add new book")

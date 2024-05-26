@@ -24,3 +24,11 @@ def create_student(db: Session, data: schema.StudentBase):
         print(e)
     return db_user
 
+
+def get_borrowers(db: Session, skip: int = 0, limit: int = 100):
+    db_users = db.query(
+        model.Books.book_name, model.Books.book_author_surname, model.Books.book_author,
+        model.Books.library_id, model.Books.school, model.Books.date_of_issue,
+        model.Students.student_surname, model.Students.student_name,
+        model.Students.student_class).filter(model.Books.student_uid.notin_([uuid.UUID(int=0)]))
+    return db_users.join(model.Students).offset(skip).limit(limit).all()
