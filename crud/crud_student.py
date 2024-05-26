@@ -9,8 +9,8 @@ def get_student_by_name(db: Session, student_name: str):
     return db.query(model.Students).filter(model.Students.student_name == student_name).first()
 
 
-def get_students(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(model.Students).offset(skip).limit(limit).all()
+def get_students(db: Session):
+    return db.query(model.Students).all()
 
 
 def create_student(db: Session, data: schema.StudentBase):
@@ -25,10 +25,10 @@ def create_student(db: Session, data: schema.StudentBase):
     return db_user
 
 
-def get_borrowers(db: Session, skip: int = 0, limit: int = 100):
+def get_borrowers(db: Session):
     db_users = db.query(
         model.Books.book_name, model.Books.book_author_surname, model.Books.book_author,
         model.Books.library_id, model.Books.school, model.Books.date_of_issue,
         model.Students.student_surname, model.Students.student_name,
         model.Students.student_class).filter(model.Books.student_uid.notin_([uuid.UUID(int=0)]))
-    return db_users.join(model.Students).offset(skip).limit(limit).all()
+    return db_users.join(model.Students).all()

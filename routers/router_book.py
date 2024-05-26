@@ -17,8 +17,8 @@ def create_book(data: schema.BookCreate = None, db: Session = Depends(get_db)):
 
 
 @router.get("/get_book_list/", response_model=list[schema.BookSee])
-def get_books_all(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_books_all(db, skip=skip, limit=limit)
+def get_books_all(db: Session = Depends(get_db)):
+    return crud.get_books_all(db)
 
 
 @router.get("/get_book_name/{str(book_name)}", response_model=schema.BookSee)

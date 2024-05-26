@@ -22,10 +22,10 @@ def get_student_by_name(student_name: str = None, db: Session = Depends(get_db))
 
 
 @router.get("/get_students_all/", response_model=list[schema.StudentBase])
-def get_students_all(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_students(db, skip=skip, limit=limit)
+def get_students_all(db: Session = Depends(get_db)):
+    return crud.get_students(db)
 
 
 @router.get("/get_borrowers/", response_model=list[schema.StudentSee])
-def get_borrowers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_borrowers(db, skip=skip, limit=limit)
+def get_borrowers(db: Session = Depends(get_db)):
+    return crud.get_borrowers(db)

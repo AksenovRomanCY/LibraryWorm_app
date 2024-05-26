@@ -85,10 +85,10 @@ def remove_student_in_book_by_library_id(db: Session, library_id: str):
     return db_user
 
 
-def get_books_all(db: Session, skip: int = 0, limit: int = 100):
+def get_books_all(db: Session):
     db_users = db.query(
         model.Books.book_name, model.Books.book_author_surname, model.Books.book_author, model.Books.book_description,
         model.Books.available, model.Books.library_id, model.Books.language, model.Books.school,
         model.Books.date_of_issue, model.Students.student_surname, model.Students.student_name,
         model.Students.student_class)
-    return db_users.join(model.Students).offset(skip).limit(limit).all()
+    return db_users.join(model.Students).all()
