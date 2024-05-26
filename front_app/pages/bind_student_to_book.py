@@ -3,6 +3,8 @@ import streamlit as st
 
 if 'library_id' not in st.session_state:
     st.session_state['library_id'] = ''
+if 'student_name' not in st.session_state:
+    st.session_state['student_name'] = ''
 
 st.header('The project is still :violet[in progress]', divider='violet')
 
@@ -17,7 +19,19 @@ if search:
             url='http://127.0.0.1:8000/books/get_book_id/{str(library_id)}', params={"library_id": str(library_id)}
         )
         response_dict = response.json()
-        st.table(data=response_dict)
+        st.dataframe({
+            "ID": [response_dict.get("library_id")],
+            "Title": [response_dict.get("book_name")],
+            "Author surname": [response_dict.get("book_author_surname")],
+            "Author name": [response_dict.get("book_author")],
+            "Description": [response_dict.get("book_description")],
+            "Language": [response_dict.get("language")],
+            "School": [response_dict.get("school")],
+            "Available": [response_dict.get("available")],
+            "Borrower name": [response_dict.get("student_name")],
+            "Borrower class": [response_dict.get("student_class")],
+            "Data of issue": [response_dict.get("date_of_issue")]
+        }, hide_index=True)
         st.session_state['library_id'] = response_dict.get("library_id")
 
 
@@ -25,17 +39,33 @@ st.divider()
 
 
 student_name = st.text_input('Add student name')
+st.session_state['student_name'] = student_name
+date_st = st.radio(
+    "Date",
+    ["Current date", "Custom date"],
+    index=0
+    )
+if date_st == "Current date":
+    date = 'current'
+else:
+    date = st.date_input("Date", format="YYYY-MM-DD", value=None)
+st.session_state['date'] = date
+
 bind = st.button("Bind")
 if bind:
     if student_name == '':
         st.warning('Not all mandatory fields are filled in', icon="⚠️")
     else:
         response = requests.put(
-            url='http://127.0.0.1:8000/books/update_a/{str(library_id)}/{str(student_name)}',
-            params={"library_id": str(st.session_state['library_id']), "student_name": str(student_name)}
+            url='http://127.0.0.1:8000/books/update_a/{str(library_id)}/{str(student_name)}/{str(date)}',
+            params={"library_id": str(st.session_state['library_id']),
+                    "student_name": str(st.session_state['student_name']),
+                    "date": str(st.session_state['date'])}
         )
         st.success('Done!', icon="✅")
         st.session_state['library_id'] = ''
+        st.session_state['student_name'] = ''
+        st.session_state['date'] = ''
 
 
 with st.sidebar:

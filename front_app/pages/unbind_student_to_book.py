@@ -17,8 +17,19 @@ if search:
             url='http://127.0.0.1:8000/books/get_book_id/{str(library_id)}', params={"library_id": str(library_id)}
         )
         response_dict = response.json()
-        st.table(data=response_dict)
-        st.session_state['library_id'] = response_dict.get("library_id")
+        st.dataframe({
+            "ID": [response_dict.get("library_id")],
+            "Title": [response_dict.get("book_name")],
+            "Author surname": [response_dict.get("book_author_surname")],
+            "Author name": [response_dict.get("book_author")],
+            "Description": [response_dict.get("book_description")],
+            "Language": [response_dict.get("language")],
+            "School": [response_dict.get("school")],
+            "Available": [response_dict.get("available")],
+            "Borrower name": [response_dict.get("student_name")],
+            "Borrower class": [response_dict.get("student_class")],
+            "Data of issue": [response_dict.get("date_of_issue")]
+        }, hide_index=True)
 
 
 st.divider()

@@ -45,13 +45,13 @@ def update_book_by_library_id(data: schema.BookBase = None, library_id: str = No
     return crud.update_book_by_library_id(data=data, db=db, library_id=library_id)
 
 
-@router.put("/update_a/{str(library_id)}/{str(student_name)}", response_model=schema.BookBase)
+@router.put("/update_a/{str(library_id)}/{str(student_name)}/{str(date)}", response_model=schema.BookBase)
 def add_student_in_book_by_library_id(
-        library_id: str = None, student_name: str = None, db: Session = Depends(get_db)):
+        library_id: str = None, student_name: str = None, date: str = None, db: Session = Depends(get_db)):
     db_user = crud.get_book_by_library_id(db, library_id=library_id)
     if db_user is None:
-        raise HTTPException(status_code=404, detail="User not found")
-    return crud.add_student_in_book_by_library_id(student_name=student_name, db=db, library_id=library_id)
+        raise HTTPException(status_code=404, detail="Book not found")
+    return crud.add_student_in_book_by_library_id(student_name=student_name, db=db, library_id=library_id, date=date)
 
 
 @router.put("/update_r/{str(library_id)}", response_model=schema.BookBase)

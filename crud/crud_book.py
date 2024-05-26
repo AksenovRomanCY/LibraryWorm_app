@@ -54,14 +54,17 @@ def update_book_by_library_id(db: Session, library_id: str, data: schema.BookBas
     return db_user
 
 
-def add_student_in_book_by_library_id(db: Session, library_id: str, student_name: str):
+def add_student_in_book_by_library_id(db: Session, library_id: str, student_name: str, date: str):
     db_user = db.query(model.Books).filter(model.Books.library_id == library_id).first()
     db_user_st = db.query(model.Students).filter(model.Students.student_name == student_name).first()
     db_user.student_uid = db_user_st.student_uid
     db_user.available = False
-    current_time = time.time()
-    local_time = time.localtime(current_time)
-    db_user.date_of_issue = time.strftime("%d-%m-%Y", local_time)
+    if date == 'current':
+        current_time = time.time()
+        local_time = time.localtime(current_time)
+        db_user.date_of_issue = time.strftime("%Y-%m-%d", local_time)
+    else:
+        db_user.date_of_issue = date
     try:
         db.add(db_user)
         db.commit()
@@ -75,7 +78,7 @@ def remove_student_in_book_by_library_id(db: Session, library_id: str):
     db_user = db.query(model.Books).filter(model.Books.library_id == library_id).first()
     db_user.student_uid = uuid.UUID(int=0)
     db_user.available = True
-    db_user.date_of_issue = '00-00-0000'
+    db_user.date_of_issue = '0000-00-00'
     try:
         db.add(db_user)
         db.commit()
