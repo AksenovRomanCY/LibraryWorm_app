@@ -7,6 +7,7 @@ tab1, tab2, tab3 = st.tabs(["Catalog", "Borrower list", "Student list"])
 with tab1:
     response = requests.get(url='http://127.0.0.1:8000/books/get_book_list/')
     response_dict = response.json()
+    st.write(response_dict)
     st.dataframe(data=response_dict, column_config={
         "library_id": "ID",
         "book_name": "Title",
@@ -16,6 +17,7 @@ with tab1:
         "language": "Language",
         "school": "School",
         "available": "Available",
+        "student_surname": "Borrower surname",
         "student_name": "Borrower name",
         "student_class": "Borrower class",
         "date_of_issue": "Data of issue"

@@ -54,9 +54,10 @@ def update_book_by_library_id(db: Session, library_id: str, data: schema.BookBas
     return db_user
 
 
-def add_student_in_book_by_library_id(db: Session, library_id: str, student_name: str, date: str):
+def add_student_in_book_by_library_id(db: Session, library_id: str, student_surname: str, student_name: str, date: str):
     db_user = db.query(model.Books).filter(model.Books.library_id == library_id).first()
-    db_user_st = db.query(model.Students).filter(model.Students.student_name == student_name).first()
+    db_user_st = db.query(model.Students).filter(model.Students.student_name == student_name,
+                                                 model.Students.student_surname == student_surname).first()
     db_user.student_uid = db_user_st.student_uid
     db_user.available = False
     if date == 'current':

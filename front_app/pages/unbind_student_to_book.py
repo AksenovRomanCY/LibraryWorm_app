@@ -30,7 +30,7 @@ if search:
             "Borrower class": [response_dict.get("student_class")],
             "Data of issue": [response_dict.get("date_of_issue")]
         }, hide_index=True)
-
+        st.session_state['library_id'] = response_dict.get("library_id")
 
 st.divider()
 

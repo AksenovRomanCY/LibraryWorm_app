@@ -5,6 +5,8 @@ if 'library_id' not in st.session_state:
     st.session_state['library_id'] = ''
 if 'student_name' not in st.session_state:
     st.session_state['student_name'] = ''
+if 'student_surname' not in st.session_state:
+    st.session_state['student_surname'] = ''
 
 st.header('The project is still :violet[in progress]', divider='violet')
 
@@ -38,6 +40,8 @@ if search:
 st.divider()
 
 
+student_surname = st.text_input('Add student surname')
+st.session_state['student_surname'] = student_surname
 student_name = st.text_input('Add student name')
 st.session_state['student_name'] = student_name
 date_st = st.radio(
@@ -59,11 +63,13 @@ if bind:
         response = requests.put(
             url='http://127.0.0.1:8000/books/update_a/{str(library_id)}/{str(student_name)}/{str(date)}',
             params={"library_id": str(st.session_state['library_id']),
+                    "student_surname": str(st.session_state['student_surname']),
                     "student_name": str(st.session_state['student_name']),
                     "date": str(st.session_state['date'])}
         )
         st.success('Done!', icon="✅")
         st.session_state['library_id'] = ''
+        st.session_state['student_surname'] = ''
         st.session_state['student_name'] = ''
         st.session_state['date'] = ''
 
