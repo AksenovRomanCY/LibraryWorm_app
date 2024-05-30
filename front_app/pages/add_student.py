@@ -1,6 +1,9 @@
 import requests
 import streamlit as st
 
+st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorative_cover:",
+                   layout="wide", initial_sidebar_state="auto")
+
 st.header('The project is still :violet[in progress]', divider='violet')
 
 with st.form("my_form"):

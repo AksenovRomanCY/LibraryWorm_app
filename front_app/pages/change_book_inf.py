@@ -1,6 +1,9 @@
 import requests
 import streamlit as st
 
+st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorative_cover:",
+                   layout="wide", initial_sidebar_state="auto")
+
 if 'book_name' not in st.session_state:
     st.session_state['book_name'] = ''
 if 'book_author_surname' not in st.session_state:

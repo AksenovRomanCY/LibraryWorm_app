@@ -1,6 +1,8 @@
 import streamlit as st
 import requests
 
+st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorative_cover:",
+                   layout="wide", initial_sidebar_state="auto")
 st.header('The project is still :violet[in progress]', divider='violet')
 
 tab1, tab2, tab3 = st.tabs(["Catalog", "Borrower list", "Student list"])

@@ -29,7 +29,7 @@ class Books(Base):
     language = Column(String, index=True)
 
     available = Column(Boolean, default=True)
-    date_of_issue = Column(String, index=True, default='00-00-0000')
+    date_of_issue = Column(String, index=True, default='0000-00-00')
 
     student_uid = Column(Uuid, ForeignKey("students.student_uid"),
                          primary_key=False, unique=False, default=uuid.UUID(int=0))
