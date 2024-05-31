@@ -6,7 +6,7 @@ st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorativ
 st.header('The project is still :violet[in progress]', divider='violet')
 
 tab1, tab2, tab3 = st.tabs(["Catalog", "Borrower list", "Student list"])
-with tab1:
+with (tab1):
     response = requests.get(url='http://127.0.0.1:8000/books/get_book_list/')
     response_dict = response.json()
     st.dataframe(data=response_dict, column_config={
@@ -23,6 +23,8 @@ with tab1:
         "student_class": "Borrower class",
         "date_of_issue": "Data of issue"
     })
+    response_1 = requests.get(url='http://127.0.0.1:8000/books/get_number_of_book/')
+    st.caption('Number of books: ' + response_1.text)
 
 with tab2:
     response = requests.get(url='http://127.0.0.1:8000/students/get_borrowers/')

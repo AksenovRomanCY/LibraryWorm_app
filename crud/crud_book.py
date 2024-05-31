@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
 import uuid
 import time
+from sqlalchemy import func
 
 import models as model
 from schemas import schema_book as schema
@@ -96,3 +97,7 @@ def get_books_all(db: Session):
         model.Books.date_of_issue, model.Students.student_surname, model.Students.student_name,
         model.Students.student_class)
     return db_users.join(model.Students).all()
+
+
+def get_number_of_book(db: Session):
+    return db.query(func.count()).select_from(model.Books).scalar()

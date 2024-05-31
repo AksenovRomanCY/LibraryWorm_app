@@ -60,3 +60,8 @@ def add_student_in_book_by_library_id(
 def remove_student_in_book_by_library_id(
         library_id: str = None, db: Session = Depends(get_db)):
     return crud.remove_student_in_book_by_library_id(db=db, library_id=library_id)
+
+
+@router.get("/get_number_of_book/", response_model=int)
+def get_number_of_book(db: Session = Depends(get_db)):
+    return crud.get_number_of_book(db)
