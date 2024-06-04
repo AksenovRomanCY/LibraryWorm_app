@@ -38,8 +38,9 @@ with st.form("my_form"):
                 "Language": [response_dict.get("language")],
                 "School": [response_dict.get("school")],
                 "Available": [response_dict.get("available")],
-                "Borrower name": [response_dict.get("student_name")],
-                "Borrower class": [response_dict.get("student_class")],
+                "Student surname": [response_dict.get("student_surname")],
+                "Student name": [response_dict.get("student_name")],
+                "Student class": [response_dict.get("student_class")],
                 "Data of issue": [response_dict.get("date_of_issue")]
             }, hide_index=True)
             st.session_state['book_name'] = response_dict.get("book_name")
