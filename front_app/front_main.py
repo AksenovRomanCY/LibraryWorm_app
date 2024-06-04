@@ -3,6 +3,9 @@ import requests
 
 st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorative_cover:",
                    layout="wide", initial_sidebar_state="auto")
+
+st.logo("/Users/roman/PycharmProjects/sql_app/front_app/Logo.png")
+
 st.header('The project is still :violet[in progress]', divider='violet')
 
 tab1, tab2 = st.tabs(["Catalog", "Student list"])
