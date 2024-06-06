@@ -65,3 +65,9 @@ def remove_student_in_book_by_library_id(
 @router.get("/get_number_of_book/", response_model=int)
 def get_number_of_book(db: Session = Depends(get_db)):
     return crud.get_number_of_book(db)
+
+
+@router.delete("/remove_book/{str(library_id)}", response_model=schema.BookBase)
+def remove_book_by_library_id(
+        library_id: str = None, db: Session = Depends(get_db)):
+    return crud.remove_book(db=db, library_id=library_id)
