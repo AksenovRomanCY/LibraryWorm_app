@@ -18,9 +18,10 @@ def get_students_all(db: Session = Depends(get_db)):
     return crud.get_students(db)
 
 
-@router.get("/get_student", response_model=schema.StudentBase)
-def get_student(data: schema.StudentBase = None, db: Session = Depends(get_db)):
-    db_user = crud.get_student(db, data)
+@router.get("/get_student/{str(student_surname)}/{str(student_name)}",
+            response_model=schema.StudentBase)
+def get_student(student_surname: str = None, student_name: str = None, db: Session = Depends(get_db)):
+    db_user = crud.get_student(db, student_surname=student_surname, student_name=student_name)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user

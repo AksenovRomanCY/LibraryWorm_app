@@ -21,7 +21,7 @@ def create_student(db: Session, data: schema.StudentBase):
     return db_user
 
 
-def get_student_by_name_surname(db: Session, student_surname: str, student_name: str):
+def get_student(db: Session, student_surname: str, student_name: str):
     return db.query(model.Students).filter(model.Students.student_name == student_name,
                                            model.Students.student_surname == student_surname).first()
 
