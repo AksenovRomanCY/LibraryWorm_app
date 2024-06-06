@@ -21,11 +21,9 @@ def create_student(db: Session, data: schema.StudentBase):
     return db_user
 
 
-def get_student(db: Session, data: schema.StudentBase):
-    return db.query(model.Books).filter(
-                                        model.Books.student_surname == data.student_surname,
-                                        model.Students.student_name == data.student_name,
-                                        model.Students.st_class == data.student_class).first()
+def get_student_by_name_surname(db: Session, student_surname: str, student_name: str):
+    return db.query(model.Students).filter(model.Students.student_name == student_name,
+                                           model.Students.student_surname == student_surname).first()
 
 
 def remove_book(db: Session, data: schema.StudentBase):
