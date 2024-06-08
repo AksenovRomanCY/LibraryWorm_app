@@ -7,21 +7,17 @@ st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorativ
 st.header('The project is still :violet[in progress]', divider='violet')
 
 with st.form("my_form"):
-    st.write("Add student")
-    surname = st.text_input('Surname')
-    name = st.text_input('Name')
-    st_class = st.text_input('Class')
-    submitted = st.form_submit_button("Submit")
-    if submitted:
-        if (name or st_class or surname) == '':
+    student_surname = st.text_input('Student surname')
+    student_name = st.text_input('Student name')
+    student_class = st.text_input('Student class')
+
+    remove = st.form_submit_button("Remove")
+    if remove:
+        if (student_surname or student_name or student_class) == '':
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
-            package = {
-                "student_surname": surname,
-                "student_name": name,
-                "student_class": st_class,
-            }
-            response = requests.post(url='http://127.0.0.1:8000/students/create_student/', json=package)
+            response = requests.put(
+                url='http://127.0.0.1:8000/students/remove_student')
             st.success('Done!', icon="✅")
 
 with st.sidebar:

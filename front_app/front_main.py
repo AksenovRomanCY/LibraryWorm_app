@@ -49,10 +49,12 @@ with st.sidebar:
     st.page_link("front_main.py", label="Main page")
 
     st.header(':violet[Changes] in the book catolog', divider='violet')
-    st.page_link("pages/add_book.py", label="Add book")
+    st.page_link("pages/add_book.py", label="Add new book")
     st.page_link("pages/change_book_inf.py", label="Edit the book's inf")
+    st.page_link("pages/remove_book.py", label="Remove book")
 
     st.header(':violet[Interactions] with students', divider='violet')
-    st.page_link("pages/add_student.py", label="Add student")
+    st.page_link("pages/add_student.py", label="Add new student")
     st.page_link("pages/bind_student_to_book.py", label="Bind the student to the book")
     st.page_link("pages/unbind_student_to_book.py", label="Unbind the student to the book")
+    st.page_link("pages/remove_student.py", label="Remove student")
