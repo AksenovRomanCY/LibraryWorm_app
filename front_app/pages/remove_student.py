@@ -13,11 +13,16 @@ with st.form("my_form"):
 
     remove = st.form_submit_button("Remove")
     if remove:
-        if (student_surname or student_name or student_class) == '':
+        if (student_surname or student_name or student_class) == ('' or '-'):
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
-            response = requests.put(
-                url='http://127.0.0.1:8000/students/remove_student')
+            response = requests.delete(
+                url='http://127.0.0.1:8000/students/remove_student/{str(student_surname)}/{str(student_name)}/{str('
+                    'student_class)}',
+                params={"student_surname": student_surname,
+                        "student_name": student_name,
+                        "student_class": student_class}
+            )
             st.success('Done!', icon="✅")
 
 with st.sidebar:

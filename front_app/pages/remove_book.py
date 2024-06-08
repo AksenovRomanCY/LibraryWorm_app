@@ -13,7 +13,7 @@ with st.form("my_form"):
         if library_id == '':
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
-            response = requests.get(
+            response = requests.delete(
                 url='http://127.0.0.1:8000/books/remove_book/{str(library_id)}', params={"library_id": str(library_id)})
             st.success('Done!', icon="✅")
 

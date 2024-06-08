@@ -26,11 +26,11 @@ def get_student(db: Session, student_surname: str, student_name: str):
                                            model.Students.student_surname == student_surname).first()
 
 
-def remove_book(db: Session, data: schema.StudentBase):
-    db_user = db.query(model.Books).filter(
-                                            model.Books.student_surname == data.student_surname,
-                                            model.Students.student_name == data.student_name,
-                                            model.Students.st_class == data.student_class).first()
+def remove_book(db: Session, student_surname: str, student_name: str, student_class: str):
+    db_user = db.query(model.Students).filter(
+                                            model.Students.student_surname == student_surname,
+                                            model.Students.student_name == student_name,
+                                            model.Students.student_class == student_class).first()
     try:
         db.delete(db_user)
         db.commit()

@@ -27,9 +27,11 @@ def get_student(student_surname: str = None, student_name: str = None, db: Sessi
     return db_user
 
 
-@router.delete("/remove_student", response_model=schema.StudentBase)
-def remove_student(data: schema.StudentBase = None, db: Session = Depends(get_db)):
-    db_user = crud.get_student(db, student_surname=data.student_surname, student_name=data.student_name)
+@router.delete("/remove_student/{str(student_surname)}/{str(student_name)}/{str(student_class)}", response_model=schema.StudentBase)
+def remove_student(student_surname: str = None, student_name: str = None,
+                   student_class: str = None, db: Session = Depends(get_db)):
+    db_user = crud.get_student(db, student_surname=student_surname, student_name=student_name)
     if db_user is None:
         raise HTTPException(status_code=404, detail="User not found")
-    return crud.remove_book(db=db, data=data)
+    return crud.remove_book(db=db, student_surname=student_surname,
+                            student_name=student_name, student_class=student_class)
