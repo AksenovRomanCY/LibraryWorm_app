@@ -62,7 +62,8 @@ if bind:
         st.warning('Not all mandatory fields are filled in', icon="⚠️")
     else:
         response = requests.put(
-            url='http://127.0.0.1:8000/books/update_a/{str(library_id)}/{str(student_name)}/{str(date)}',
+            url='http://127.0.0.1:8000/books/update_a/{str(library_id)}/{str(student_surname)}/{str(student_name)}/{'
+                'str(date)}',
             params={"library_id": str(st.session_state['library_id']),
                     "student_surname": str(st.session_state['student_surname']),
                     "student_name": str(st.session_state['student_name']),
