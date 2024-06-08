@@ -13,7 +13,7 @@ with st.form("my_form"):
     st_class = st.text_input('Class')
     submitted = st.form_submit_button("Submit")
     if submitted:
-        if (name or st_class or surname) == '':
+        if (name == '') or (st_class == '') or (surname == ''):
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
             package = {
@@ -21,7 +21,7 @@ with st.form("my_form"):
                 "student_name": name,
                 "student_class": st_class,
             }
-            response = requests.post(url='http://127.0.0.1:8000/students/create_student/', json=package)
+            response = requests.post(url='http://127.0.0.1:8000/students/create_student', json=package)
             st.success('Done!', icon="✅")
 
 with st.sidebar:

@@ -13,7 +13,7 @@ with st.form("my_form"):
 
     remove = st.form_submit_button("Remove")
     if remove:
-        if (student_surname or student_name or student_class) == ('' or '-'):
+        if (student_surname == ('' or '-')) or (student_name == ('' or '-')) or (student_class == ('' or '-')):
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
             response = requests.delete(

@@ -8,7 +8,7 @@ from schemas import schema_book as schema
 router = APIRouter()
 
 
-@router.post('/create_book/', response_model=schema.BookCreate)
+@router.post('/create_book', response_model=schema.BookCreate)
 def create_book(data: schema.BookCreate = None, db: Session = Depends(get_db)):
     db_user = crud.get_book_by_library_id(db, library_id=data.library_id)
     if db_user:
@@ -16,7 +16,7 @@ def create_book(data: schema.BookCreate = None, db: Session = Depends(get_db)):
     return crud.create_book(db=db, data=data)
 
 
-@router.get("/get_book_list/", response_model=list[schema.BookSee])
+@router.get("/get_book_list", response_model=list[schema.BookSee])
 def get_books_all(db: Session = Depends(get_db)):
     return crud.get_books_all(db)
 
@@ -63,7 +63,7 @@ def remove_student_in_book_by_library_id(
     return crud.remove_student_in_book_by_library_id(db=db, library_id=library_id)
 
 
-@router.get("/get_number_of_book/", response_model=int)
+@router.get("/get_number_of_book", response_model=int)
 def get_number_of_book(db: Session = Depends(get_db)):
     return crud.get_number_of_book(db)
 

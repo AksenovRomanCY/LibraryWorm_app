@@ -58,7 +58,7 @@ st.session_state['date'] = date
 
 bind = st.button("Bind")
 if bind:
-    if student_name == '':
+    if (student_surname == '') or (student_name == '') or (st.session_state['library_id'] == ''):
         st.warning('Not all mandatory fields are filled in', icon="⚠️")
     else:
         response = requests.put(

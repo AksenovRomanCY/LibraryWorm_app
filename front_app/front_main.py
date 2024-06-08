@@ -10,7 +10,7 @@ st.header('The project is still :violet[in progress]', divider='violet')
 
 tab1, tab2 = st.tabs(["Catalog", "Student list"])
 with (tab1):
-    response = requests.get(url='http://127.0.0.1:8000/books/get_book_list/')
+    response = requests.get(url='http://127.0.0.1:8000/books/get_book_list')
     response_dict = response.json()
     st.dataframe(data=response_dict, column_config={
         "library_id": "ID",
@@ -26,11 +26,11 @@ with (tab1):
         "student_class": "Student class",
         "date_of_issue": "Data of issue"
     })
-    response_1 = requests.get(url='http://127.0.0.1:8000/books/get_number_of_book/')
+    response_1 = requests.get(url='http://127.0.0.1:8000/books/get_number_of_book')
     st.caption('Number of books: ' + response_1.text)
 
 with tab2:
-    response = requests.get(url='http://127.0.0.1:8000/students/get_students_all/')
+    response = requests.get(url='http://127.0.0.1:8000/students/get_students_all')
     response_dict = response.json()
     st.dataframe(data=response_dict, column_config={
         "student_surname": "Surname",

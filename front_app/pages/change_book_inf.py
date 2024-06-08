@@ -3,7 +3,8 @@ import streamlit as st
 
 st.set_page_config(page_title="LibraryWorm", page_icon=":notebook_with_decorative_cover:",
                    layout="wide", initial_sidebar_state="auto")
-
+if 'library_id' not in st.session_state:
+    st.session_state['library_id'] = ''
 if 'book_name' not in st.session_state:
     st.session_state['book_name'] = ''
 if 'book_author_surname' not in st.session_state:
@@ -43,6 +44,7 @@ with st.form("my_form"):
                 "Student class": [response_dict.get("student_class")],
                 "Data of issue": [response_dict.get("date_of_issue")]
             }, hide_index=True)
+            st.session_state['library_id'] = response_dict.get("library_id")
             st.session_state['book_name'] = response_dict.get("book_name")
             st.session_state['book_author_surname'] = response_dict.get("book_author_surname")
             st.session_state['book_author'] = response_dict.get("book_author")
@@ -67,7 +69,7 @@ with st.form("my_form2"):
     )
     submitted = st.form_submit_button("Submit")
     if submitted:
-        if (name or author) == '':
+        if (name == '') or (author_surname == '') or (author == '') or (st.session_state['library_id'] == ''):
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
             package = {

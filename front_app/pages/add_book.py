@@ -27,7 +27,7 @@ with st.form("my_form"):
 
     submitted = st.form_submit_button("Submit")
     if submitted:
-        if (name or author or lib_id) == '':
+        if (name == '') or (author_surname == '') or (author == '') or (lib_id == ''):
             st.warning('Not all mandatory fields are filled in', icon="⚠️")
         else:
             package = {
@@ -39,7 +39,7 @@ with st.form("my_form"):
                 "library_id": lib_id,
                 "language": lang
             }
-            response = requests.post(url='http://127.0.0.1:8000/books/create_book/', json=package)
+            response = requests.post(url='http://127.0.0.1:8000/books/create_book', json=package)
             st.success('Done!', icon="✅")
 
 with st.sidebar:
